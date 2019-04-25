@@ -2,11 +2,11 @@
 # 第六章  示例代码02  构建并训练 MNIST 数据集分类模型。
 # 改用sparse_softmax_cross_entropy_with_logits函数来运算交叉熵。
 
-import tensorflow as tf  # 导入 tensorflow 库
 from tensorflow.examples.tutorials.mnist import input_data
+import tensorflow as tf  # 导入 tensorflow 库
+import pylab 
 
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-import pylab
 
 tf.reset_default_graph()
 # 定义占位符
@@ -15,11 +15,12 @@ y = tf.placeholder(tf.float32, [None, 10])  # 数字 0 ~ 9，共 10 个类别
 # 定义学习参数
 W = tf.Variable(tf.random_normal([784, 10]))
 b = tf.Variable(tf.zeros([10]))
+z= tf.matmul(x, W) + b
 # 定义输出节点
-pred = tf.nn.softmax(tf.matmul(x, W) + b)  # Softmax 分类，正向结构
+pred = tf.nn.softmax(z)  # Softmax 分类，正向结构
 # 损失函数
-cost = tf.reduce_mean(-tf.reduce_sum(y * tf.log(pred), reduction_indices=1))
-
+# cost = tf.reduce_mean(-tf.reduce_sum(y * tf.log(pred), reduction_indices=1))
+cost = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=y, logits=z))
 # 定义参数
 learning_rate = 0.01
 # 使用梯度下降优化器
