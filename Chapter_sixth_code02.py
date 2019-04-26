@@ -2,8 +2,8 @@
 # 第六章  示例代码02  构建并训练 MNIST 数据集分类模型。
 # 改用sparse_softmax_cross_entropy_with_logits函数来运算交叉熵。
 
-from tensorflow.examples.tutorials.mnist import input_data
 import tensorflow as tf  # 导入 tensorflow 库
+from tensorflow.examples.tutorials.mnist import input_data
 import pylab 
 
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
