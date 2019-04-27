@@ -18,9 +18,13 @@ b = tf.Variable(tf.zeros([10]))
 z= tf.matmul(x, W) + b
 # 定义输出节点
 pred = tf.nn.softmax(z)  # Softmax 分类，正向结构
-# 损失函数
+# 损失函数 http://maaiguo.com/ai/tensorflow-valueerror_342.html
+# 改用sparse_softmax_cross_entropy_with_logits函数来运算交叉熵，程序错误。
+# sparse_softmax_cross_entropy_with_logits 主要用余结果是排他唯一性的计算，
+# 如果是非唯一的需要用到 softmax_cross_entropy_with_logits。
 # cost = tf.reduce_mean(-tf.reduce_sum(y * tf.log(pred), reduction_indices=1))
-cost = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=y, logits=z))
+# cost = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(labels=y, logits=z))
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=z))
 # 定义参数
 learning_rate = 0.01
 # 使用梯度下降优化器
