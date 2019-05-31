@@ -30,7 +30,7 @@ learning_rate = 0.04
 optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
 
 # 定义训练参数
-training_epochs = 200  # 训练集样本迭代次数
+training_epochs = 100  # 训练集样本迭代次数
 batch_size = 100  # 训练过程中每次训练数据条数
 display_step = 1  # 每训练一次显示具体的中间状态
 
