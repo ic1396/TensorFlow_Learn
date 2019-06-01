@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+﻿#!/usr/bin/python3
 # 第七章  示例代码02  线性多分类
 # 使用生成的模拟数据，线性多分类
 
@@ -119,7 +119,7 @@ with tf.Session() as sess:
     xs1 = np.linspace(-1, 8, num=nb_of_xs)
     xs2 = np.linspace(-1, 8, num=nb_of_xs)
     xx, yy = np.meshgrid(xs1, xs2)     # 创建网格
-    # 初始化和填充 classification plane
+    # 初始化和填充 classification_plane
     classification_plane = np.zeros((nb_of_xs, nb_of_xs))
     for i in range(nb_of_xs):
         for j in range(nb_of_xs):
