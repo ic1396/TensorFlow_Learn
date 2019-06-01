@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # 第七章  示例代码01  线性逻辑回归
-# 使用生成的模拟数据
+# 使用生成的模拟数据，线性二分类
 
 import numpy as np
 from sklearn.utils import shuffle
@@ -76,21 +76,11 @@ with tf.Session() as sess:
             
         print("Epoch:", '%04d' % (epoch + 1), "cost =", "{:.9f}".format(lossval),\
               "err =", sumerr / minibatchSize)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    train_X, train_Y = generate(100, mean, cov, [3.0], True)
+    colors = ['r' if l == 0 else 'b' for l in train_Y[:]]
+    plt.scatter(train_X[:, 0], train_X[:, 1], c=colors)
+    x = np.linspace(-1, 8, 200)
+    y = -x * (sess.run(W)[0] / sess.run(W)[1]) - sess.run(b) / sess.run(W)[1]
+    plt.plot(x, y, label='Fitted line')
+    plt.legend()
+    plt.show()
